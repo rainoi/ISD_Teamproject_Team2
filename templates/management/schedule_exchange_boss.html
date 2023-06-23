@@ -1,0 +1,40 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+<body>
+<h1><center>Exchange History & Approval </center></h1><hr>
+<div class="container">
+<table class="table table-striped table-light">
+        <thead>
+          <tr>
+             <th>Applicant</th>
+             <th>Applicant StartTime</th>
+             <th>Applicant EndTime</th>
+             <th>Requested</th>
+             <th>Requested StartTime</th>
+             <th>Requested EndTime</th>
+             <th>Approval</th>
+          </tr>
+        </thead>
+          <tr>
+          {% for e in exchanges %}
+            <td> {{ e.employee1.emp_name }} </td>
+            <td> {{ e.start1 }}</td>
+            <td> {{ e.end1 }}</td>
+            <td> {{ e.employee2.emp_name }} </td>
+            <td> {{ e.start2 }}</td>
+            <td> {{ e.end2 }}</td>
+            <td> {% if e.approval %}
+                    교대 처리 완료
+                {% else %}
+                    {{ e.approval }}
+                {% endif %} </td>
+              </tr>
+          {%endfor%}
+        </table>
+</div>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</body>
+{% endblock %}

@@ -1,0 +1,23 @@
+<html>
+<body>
+<div class="container">
+<h1> 글쓰기</h1>
+
+<form method="POST">
+  {% csrf_token %}
+      <label>Number</label> Number </br>
+      <label>Writer</label>  {{ form.not_writer }} </br>
+      <label>Title</label>  {{ form.not_title}} </br>
+      <label>Content</label> {{ form.not_content }} </br>
+
+
+  <button class="btn btn-default" type="submit">Save</button>
+  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+</form>
+
+
+
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</body>
+</html>

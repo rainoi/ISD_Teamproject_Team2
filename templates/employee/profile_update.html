@@ -1,0 +1,83 @@
+{% extends "index/base.html" %}
+
+{% block mobileView %}
+<meta name="viewport" content="width=550, user-scalable=yes">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-top: 3rem !important;">
+        <div class="col-12">
+
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:8px;">
+                        <strong style="font-size: 20px;"><i class="fas fa-user-edit"></i>&nbsp;&nbsp;내 정보 수정</strong>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <table style="line-height: 2rem; color:black; margin-left:10px;">
+                                <tr>
+                                    <td class="profile_title">아이디 : </td>
+                                    {% if user.emp_level == '0'%}
+                                    <td class="profile_content">&nbsp;&nbsp;{{ employee.emp_id }}&nbsp;&nbsp;(매니저)</td>
+                                    {% elif user.emp_level == '1' %}
+                                    <td class="profile_content">&nbsp;&nbsp;{{ employee.emp_id }}&nbsp;&nbsp;(관리자)</td>
+                                    {% else %}
+                                    <td class="profile_content">&nbsp;&nbsp;{{ employee.emp_id }}</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">이름 : </td>
+                                    <td class="profile_content">{{ emp_change_form.emp_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">생년월일 : </td>
+                                    <td class="profile_content">{{ employee.emp_birth }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">성별 : </td>
+                                    <td class="profile_content">{{ employee.emp_gender }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">주소 : </td>
+                                    <td class="profile_content">{{ emp_change_form.emp_address }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">전화번호 : </td>
+                                    <td class="profile_content">{{ emp_change_form.emp_phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">계좌번호 : </td>
+                                    <td class="profile_content">{{ emp_change_form.emp_account }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">이메일 : </td>
+                                    <td class="profile_content">{{ employee.emp_email }}</td>
+                                </tr>
+
+
+                            </table>
+                            <br>
+                            <div style="text-align: center; margin-bottom:-15px;">
+                                <a onclick="location.href='/mgmt/profile/'" class="btn btn-secondary" style="color:#ffffff; padding: 12px; font-size:15px; font-weight: bold" id="back_btn"><i class="fa fa-reply"></i>돌아가기</a>
+                                <button type="submit" class="btn btn-danger" style="color:#ffffff; padding: 12px; font-size:15px; font-weight: bold" id="detail_btn">수정하기</button>
+                            </div>
+                        </form>
+                        
+                        <script type = "text/javascript">
+                            function maxLengthCheck(object){
+                                if (object.value.length > object.maxLength) {
+                                    object.value = object.value.slice(0, object.maxLength);
+                                    }   
+                                }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

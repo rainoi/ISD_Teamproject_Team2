@@ -1,0 +1,60 @@
+{% extends "index/base.html" %}
+
+{% load static %}
+
+{% block mobileView %}
+<meta name="viewport" content="width=800, user-scalable=yes">
+{% endblock %}
+
+{% block summernote %}
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 style="font-family:sans-serif; font-weight: bold;">공지사항</h3>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row-mt-5">
+        <!--본문-->
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card" style="width: 100%;">
+                <!--제목,분류,작성일-->
+                <div class="card-header" style="padding: 0rem 0.8rem">
+                    <div class="md-form form-group" style="margin-top: 10px;">
+                        <div style="padding: 0 5.5px;">
+                            {{ form.not_title.label }}
+                            {{ form.not_title }}
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="card-body">
+                    <div class="form-group">
+                        <div class=" col-sm-12">
+                            {{ form.not_content }}
+                        </div>
+                    </div>
+                </div>-->
+                <div style="padding: 10px;">
+                <!--내용-->
+                    {{ form.not_content }}
+                </div>
+            </div>
+
+            <br>
+                {% if edit %}
+                <button type="submit" id="write" class="btn btn-outline-primary">{{ edit }}</button>
+                {% else %}
+                <button type="submit" id="write" class="btn btn-outline-primary">작성하기</button>
+                {% endif %}
+                <input type="checkbox" id="fileChangeCheck" name="fileChange" style="display: none;">
+        </form>
+    </div>
+</div>
+{% endblock %}

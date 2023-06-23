@@ -1,0 +1,73 @@
+{% extends "index/base.html" %}
+
+{% block mobileView %}
+<meta name="viewport" content="width=550, user-scalable=yes">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-top: 3rem !important;">
+        <div class="col-12">
+
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:8px;">
+                        <strong style="font-size: 20px;"><i class="fas"></i>&nbsp;&nbsp;내 정보</strong>
+                    </div>
+                    <div class="card-body">
+                        <table style="color:black; margin-left:10px; line-height: 2rem;">
+                            {% for employee in employees %}
+                                <tr>
+                                    <td class="profile_title">사번번호 : </td>
+                                    {% if employee.emp_level == '0' %}
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_id }}&nbsp;&nbsp;(매니저)</td>
+                                    {% elif employee.emp_level == '1' %}
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_id }}&nbsp;&nbsp;(직원)</td>
+                                    {% else %}
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;{{ employee.emp_id }}</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">이름 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">생년월일 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_birth }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">성별 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_gender }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">주소 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_address }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">전화번호 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">계좌번호 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_account }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile_title">이메일 : </td>
+                                    <td class="profile_content">&nbsp;&nbsp;&nbsp;&nbsp;{{ employee.emp_email }}</td>
+                                </tr>
+                                {% endfor %}
+                        </table>
+
+                        <hr>
+                        <div style="text-align: center;">
+                            {% for employee in employees %}
+                            <a href="{% url 'profile_update' employee.emp_id %}" class="btn btn-danger" style="color:#ffffff; padding: 15px; font-size:15px; font-weight: bold">&nbsp;내 정보 수정</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

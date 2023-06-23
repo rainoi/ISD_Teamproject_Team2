@@ -1,0 +1,61 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+    <body>
+    <h1>
+        <center>Exchange History & Approval</center>
+    </h1>
+    <hr>
+    <div class="container">
+        <table class="table table-striped table-light">
+            <tr>
+                <th>Applicant</th>
+                <th>Applicant StartTime</th>
+                <th>Applicant EndTime</th>
+                <th>Requested</th>
+                <th>Requested StartTime</th>
+                <th>Requested EndTime</th>
+                <th>Approval</th>
+            </tr>
+            <tr>
+                {% if user.is_authenticated %}
+                {% for e in exchanges %}
+                    {% if request.user.email == e.employee2.emp_email %}
+                        <td>{{ e.employee1.emp_name }}</td>
+                        <td>{{ e.start1 }}</td>
+                        <td>{{ e.end1 }}</td>
+                        <td>{{ e.employee2.emp_name }}</td>
+                        <td>{{ e.start2 }}</td>
+                        <td>{{ e.end2 }}</td>
+                        <td>
+                            {% if not e.approval %}
+                                <a class="btn btn-primary approve-btn" href="{% url 'approve-exchange' e.id %}">승인</a>
+                                <a class="btn btn-danger reject-btn" href="{% url 'reject-exchange' e.id %}">거절</a>
+                            {% else %}
+                                교대 완료
+                            {% endif %}
+                        </td>
+                    {% elif request.user.email == e.employee1.emp_email %}
+                        <td>{{ e.employee1.emp_name }}</td>
+                        <td>{{ e.start1 }}</td>
+                        <td>{{ e.end1 }}</td>
+                        <td>{{ e.employee2.emp_name }}</td>
+                        <td>{{ e.start2 }}</td>
+                        <td>{{ e.end2 }}</td>
+                        <td>
+                            {% if not e.approval %}
+                                승인 처리 중
+                            {% else %}
+                                교대 완료
+                            {% endif %}
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+        {% endif %}
+        </table>
+    </div>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    </body>
+{% endblock %}

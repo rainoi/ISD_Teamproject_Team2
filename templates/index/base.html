@@ -1,0 +1,146 @@
+{% load socialaccount %}
+{% providers_media_js %}
+{% load static %}
+
+<html>
+<head>
+    <title>{% block title %} Save the Boss! {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-scroller">
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <div class="search-field d-none d-md-block">
+                <form class="d-flex align-items-center h-100" action="#">
+                    <div class="input-group">
+                        <div class="input-group-prepend bg-transparent">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ul class="navbar-nav navbar-nav-right ">
+                <li class="nav-item nav-profile ">
+                    <div class="nav-profile-text" style="font-size: 17px; font-weight: bold; padding-right: 2rem;">
+                        <span class="mb-5 text-black"> Welcome! <span
+                                class="bg-gradient-warning" style="padding-right: 7px;padding-left: 7px;"> {{ user.first_name }}</span> is Working-! </span>
+                    </div>
+                </li>
+                <li class="nav-item nav-logout d-none d-lg-block">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" style="padding: 5px; font-weight: bold;">
+                            <i class="mdi mdi-power text-black-50"> Log Out [Off] </i>
+                        </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item nav-settings d-none d-lg-block">
+                    <a class="nav-link" href="#">
+                    </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas" style="width: 275px !important;"  id="sidebar">
+            <ul class="nav position-fixed" style="width: 265px !important;" >
+                <li class="nav-item nav-profile"  style="padding-right: 0px !important;">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span class="font-weight-bold mb-2"> Vibe Management! </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'notice_list' %}">
+                        <span class="menu-title">Notice</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                     {% if user.username == 'boss' %}
+                        <a class="nav-link" href="{% url 'list_employees' %}">
+                            <span class="menu-title">Employee</span>
+
+                        </a>
+                    {% endif %}
+                    {% if user.username != 'boss' %}
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            <span class="menu-title">Employee</span>
+
+                        </a>
+                    {% endif %}
+                </li>
+
+                <li class="nav-item" style="width: 257px !important; padding-right: 16px !important;">
+                    <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false"
+                       aria-controls="general-pages">
+                        <span class="menu-title"> Schedule </span>
+                    </a>
+                    <div class="collapse" id="general-pages">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'schedule_list' %}">
+                                Schedule </a></li>
+                            {% if user.username != 'boss' %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'schedule_exchange_form' %}"> Schedule
+                                Exchange Register </a></li>
+                            {% endif %}
+                            {% if user.username == 'boss' %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'schedule_exchange_boss' %}"> Schedule
+                                    Exchange Confirm </a></li>
+                            {% elif user.username != 'boss' %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'schedule_exchange_list' %}"> Schedule
+                                Exchange Confirm </a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item" style="width: 257px !important; padding-right: 16px !important;">
+                    <a class="nav-link" data-toggle="collapse" href="#general-pages2" aria-expanded="false"
+                       aria-controls="general-pages">
+                        <span class="menu-title"> Statement </span>
+                    </a>
+                    <div class="collapse" id="general-pages2">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'list_statement' %}">
+                                Statement </a></li>
+                            {% if user.username == 'boss' %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'chart_view' %}">
+                                Statement Statistic </a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<hr>
+{% block footer %}
+    {% include 'index/info.html' %}
+{% endblock %}
+ <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+  <script src="{% static 'vendors/js/vendor.bundle.addons.js' %}"></script>
+
+
+</body>
+</html>

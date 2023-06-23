@@ -1,0 +1,45 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+    <body>
+    <h1>
+        <center>Member List</center>
+    </h1><hr>
+    <div class="container">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>BIRTH</th>
+                <th>GENDER</th>
+                <th>ADDRESS</th>
+                <th>PHONE</th>
+                <th>ACCOUNT</th>
+                <th>PLUS</th>
+                <th>EMAIL</th>
+            </tr>
+            <tr>
+                {% for employee in employees %}
+                    <td> {{ employee.emp_id }} </td>
+                    <td> {{ employee.emp_name }} </td>
+                    <td> {{ employee.emp_birth }} </td>
+                    <td> {{ employee.emp_gender }} </td>
+                    <td> {{ employee.emp_address }} </td>
+                    <td> {{ employee.emp_phone }} </td>
+                    <td> {{ employee.emp_account }} </td>
+                    <td> {{ employee.emp_plus }} </td>
+                    <td> {{ employee.emp_email }} </td>
+                    <td><a class="btn btn-info" href="{% url 'update_employee' employee.emp_id %}">Update </a></td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+        {% if user.username == 'boss' %}
+            <a class="btn btn-gradient-primary pull-right" href="{% url 'create_employee' %}">Register New Employee</a>
+        {% endif %}
+
+        <link rel="stylesheet" href="css/style.css">
+    </div>
+    </body>
+{% endblock %}
+

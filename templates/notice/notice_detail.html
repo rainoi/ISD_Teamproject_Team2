@@ -1,0 +1,79 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+    <div class="card">
+        <!--제목,분류,작성일-->
+        <div class="card-header">
+            <strong>제목 : {{ notice.not_title }}</strong>&nbsp;&nbsp;
+            <span> 등록일 : {{ notice.not_date|date:'Y.m.d. H:i' }}</span>
+            <hr>
+            <div>
+                <span> 작성자 : {{ notice.not_writer }}</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <!--내용-->
+            <div>
+                {{ notice.not_content }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+         {% if user.is_authenticated %}
+             {% if employee.emp_email == user.email and employee.emp_name == notice.not_writer%}
+                 <button class="btn btn-outline-facebook" style="padding: 15px; padding-bottom: 5px; padding-top: 5px;" id="detail_btn"
+                         onclick="location.href='/mgmt/notice_update/{{ notice.not_id }}'">수정
+                 </button>
+             {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+             {% if user.username == 'boss' and user.username == notice.not_writer%}
+                 <button class="btn btn-outline-facebook" style="padding: 15px; padding-bottom: 5px; padding-top: 5px;" id="detail_btn"
+                         onclick="location.href='/mgmt/notice_update/{{ notice.not_id }}'">수정
+                 </button>
+             {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            {% if employee.emp_email == user.email and employee.emp_name == notice.not_writer %}
+                <button class="btn btn-outline-danger" style="padding: 15px" id="detail_btn" data-toggle="modal" data-target="#delete_modal" onclick="delete_modal()"
+                        data-notice-id="{{ notice.not_id }}">삭제
+                </button>
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            {% if user.username == 'boss' %}
+                <button class="btn btn-outline-danger" style="padding: 15px; padding-bottom: 5px; padding-top: 5px;" id="detail_btn" data-toggle="modal" data-target="#delete_modal" onclick="delete_modal()"
+                        data-notice-id="{{ notice.not_id }}">삭제
+                </button>
+            {% endif %}
+        {% endif %}
+        <button class="btn btn-outline-github" onclick="location.href='/mgmt/'"
+                style="margin-left: 1px;padding: 15px; padding-bottom: 5px; padding-top: 5px;"> 목록으로</button>
+    </div>
+
+    <div id="delete_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">삭제경고</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>게시글을 삭제하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="location.href='/mgmt/notice_delete/{{ notice.not_id }}'" type="button" class="btn btn-dark">삭제하기</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">취소하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

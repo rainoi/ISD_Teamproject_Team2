@@ -1,0 +1,31 @@
+/* Fonts */
+
+//PT_Sans
+@font-face {
+  font-family: 'ubuntu-light';
+  src: url('Ubuntu-Light.eot'); /* IE9 Compat Modes */
+  src: url('Ubuntu-Light.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Ubuntu-Light.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Ubuntu-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'ubuntu-regular';
+  src: url('Ubuntu-Regular.eot'); /* IE9 Compat Modes */
+  src: url('Ubuntu-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Ubuntu-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Ubuntu-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'ubuntu-medium';
+  src: url('Ubuntu-Medium.eot'); /* IE9 Compat Modes */
+  src: url('Ubuntu-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Ubuntu-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Ubuntu-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'ubuntu-bold';
+  src: url('Ubuntu-Bold.eot'); /* IE9 Compat Modes */
+  src: url('Ubuntu-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Ubuntu-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Ubuntu-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
